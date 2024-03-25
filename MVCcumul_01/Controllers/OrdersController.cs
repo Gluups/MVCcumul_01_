@@ -19,7 +19,6 @@ namespace MVCcumul_01.Controllers
         {
             _context = context;
             System.Diagnostics.Debug.Print(context.Database.ProviderName);
-            System.Diagnostics.Debug.Print(context.Orders.Count().ToString());
         }
 
         // GET: Orders

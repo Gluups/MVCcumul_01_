@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Hosting;
 using MVCcumul_01;
 using MVCcumul_01.Models;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 // EF Core uses this method at design time to access the DbContext
 static IHostBuilder CreateHostBuilder(string[] args)
@@ -10,12 +12,13 @@ static IHostBuilder CreateHostBuilder(string[] args)
 //            webBuilder => webBuilder.UseStartup<Startup>());
 ;
 
-var connectionString = @"Data Source=.\\SQLEXPRESS;Initial Catalog=Northwind;Integrated Security=True;Encrypt=True;TrustServer Certificate=True";
+var connectionString = @"Data Source=.\\SQLEXPRESS;Initial Catalog=Northwind;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
 
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-builder.Services
-   .AddDbContextFactory<NorthwindContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDbContext<NorthwindContext>(options =>
+        options.UseSqlServer(connectionString));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
